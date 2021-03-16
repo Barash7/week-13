@@ -12,7 +12,7 @@ const Header = () => {
       </div>
       {repositoryName && (
         <Link id="go-repository-list" to={`/${userName}`}>
-        Go repository list
+          Go repository list
         </Link>
       )}
       <Link id="go-back" to="/">
