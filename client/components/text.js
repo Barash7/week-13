@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
+import axios from 'axios'
+import Header from './header'
 
 const Text = () => {
+  const [content, setContent] = useState()
+  const { userName, repositoryName } = useParams()
+
+  useEffect(() => {
+    axios
+    .get(`https://raw.githubusercontent.com/${userName}/${repositoryName}/master/README.md`)
+    .then((it) => {
+      setContent(it.data)
+    })
+  }, [userName, repositoryName])
+  
   return (
     <div>
-      <div className="flex items-center justify-center h-screen">
-        <div className="bg-indigo-800 text-white font-bold rounded-lg border shadow-lg p-10">
-          {/* add your routes here */}
-        </div>
+      <Header />
+      <div className="p-4" id="description">
+        <ReactMarkdown source={content} />
       </div>
     </div>
   )

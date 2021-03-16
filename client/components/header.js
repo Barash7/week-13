@@ -1,12 +1,23 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+
 
 const Header = () => {
-  const { userName } = useParams()
+  const { userName, repositoryName } = useParams()
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">{userName}</div>
+    <nav className="flex bg-indigo-800 items-center justify-between flex-wrap text-white p-6">
+      <div className="flex items-center flex-shrink-0 text-white mr-6" id="repository-name">
+        {userName}
+      </div>
+      {repositoryName && (
+        <Link id="go-repository-list" to={`/${userName}`}>
+        Go repository list
+        </Link>
+      )}
+      <Link id="go-back" to="/">
+        Go back
+      </Link>
     </nav>
   )
 }
